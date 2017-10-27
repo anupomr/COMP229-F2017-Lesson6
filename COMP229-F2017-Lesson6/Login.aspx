@@ -26,7 +26,7 @@
                         </div>
 
                         <div class="text-right">
-                            <asp:Button Text="Login" ID="LoginButton" runat="server" CssClass="btn btn-primary"  TabIndex="0" />
+                            <asp:Button Text="Login" ID="LoginButton" runat="server" CssClass="btn btn-primary" OnClick="LoginButton_Click" TabIndex="0" />
                         </div>
 
                     </div>
