@@ -1,0 +1,69 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="COMP229_F2017_Lesson6.Site" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <!-- CSS Section -->
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="Content/font-awesome.min.css" rel="stylesheet" />
+</head>
+<body>
+    <form id="form1" runat="server">
+
+        <!-- Main Navigation -->
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="Default.aspx"><i class="fa fa-graduation-cap fa-lg"></i>  Contoso University Page</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li id="home" runat="server"><a href="Default.aspx"><i class="fa fa-home fa-lg"></i>  Home</a></li>
+                        <li id="Courses" runat="server"><a href="Courses.aspx"><i class="fa fa-book fa-lg" ></i>  Courses</a></li>
+                        <li id="Students" runat="server"><a href="Students.aspx"><i class="fa fa-puzzle-piece fa-lg"></i>  Students</a></li>
+                        <li id="Departments" runat="server"><a href="Departments.aspx"><i class="fa fa-paper-plane-o fa-lg"></i>  Departments</a></li>
+                        <li id="Enrollments" runat="server"><a href="Enrollments.aspx"><i class="fa fa-map-o fa-lg"></i>  Enrollments</a></li>
+                        <li id="about" runat="server"><a href="About.aspx"><i class="fa fa-info fa-lg"></i>  About</a></li>
+                        <li id="contact" runat="server"><a href="Contact.aspx"><i class="fa fa-phone fa-lg"></i>  Contact</a></li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+        <!-- Main Content -->
+        <main>
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+        </main>
+    </form>
+
+    <!-- Footer -->
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container">
+            <h4>&copy; 2017 - Contoso University - All Rights Reserved</h4>
+        </div>
+    </nav>
+
+    <!-- Scripts Section -->
+    <script src="Scripts/jquery-2.2.4.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="Scripts/app.js"></script>
+</body>
+</html>
