@@ -22,7 +22,7 @@ namespace COMP229_F2017_Lesson6
         protected void CancelButton_Click(object sender, EventArgs e)
         {
             //Redirect back to the student page
-            Response.Redirect("~/Students.aspx");
+            Response.Redirect("~/Contoso/Students.aspx");
         }
 
         protected void SaveButton_Click(object sender, EventArgs e)
@@ -55,7 +55,7 @@ namespace COMP229_F2017_Lesson6
                 db.SaveChanges();
 
                 // Redirect back to the update Students page
-                Response.Redirect("~/Students.aspx");
+                Response.Redirect("~/Contoso/Students.aspx");
             }
         }
     }

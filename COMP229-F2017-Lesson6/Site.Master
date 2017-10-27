@@ -36,7 +36,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li id="home" runat="server"><a href="Default.aspx"><i class="fa fa-home fa-lg"></i>  Home</a></li>
                         <li id="Courses" runat="server"><a href="Courses.aspx"><i class="fa fa-book fa-lg" ></i>  Courses</a></li>
-                        <li id="Students" runat="server"><a href="Students.aspx"><i class="fa fa-puzzle-piece fa-lg"></i>  Students</a></li>
+                        <li id="Students" runat="server"><a href="/Contoso/Students.aspx"><i class="fa fa-puzzle-piece fa-lg"></i>  Students</a></li>
                         <li id="Departments" runat="server"><a href="Departments.aspx"><i class="fa fa-paper-plane-o fa-lg"></i>  Departments</a></li>
                         <li id="Enrollments" runat="server"><a href="Enrollments.aspx"><i class="fa fa-map-o fa-lg"></i>  Enrollments</a></li>
                         <li id="about" runat="server"><a href="About.aspx"><i class="fa fa-info fa-lg"></i>  About</a></li>
