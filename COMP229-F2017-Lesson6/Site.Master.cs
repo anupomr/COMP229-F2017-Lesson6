@@ -6,13 +6,36 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+//required for Identity and OWIN Security
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Owin.Security;
+
 namespace COMP229_F2017_Lesson6
 {
     public partial class Site : System.Web.UI.MasterPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Debug.WriteLine(Page.Title + " loaded...");
+            if (!IsPostBack)
+            {
+                //check if a user is logged in
+                if (HttpContext.Current.User.Identity.IsAuthenticated)
+                {
+                    // show the contoso content area
+                    ContosoPlaceHolder.Visible = true;
+                    PublicPlaceHolder.Visible = false;
+                }
+                else
+                {
+                    // only show login and register
+                    ContosoPlaceHolder.Visible = false;
+                    PublicPlaceHolder.Visible = true;
+                }
+            }
+
+
+
             SetActivePage();
         }
 
@@ -24,16 +47,13 @@ namespace COMP229_F2017_Lesson6
                     home.Attributes.Add("class", "active");
                     break;
                 case "Students":
-                    Students.Attributes.Add("class", "active");
+                    students.Attributes.Add("class", "active");
                     break;
                 case "Courses":
-                    Courses.Attributes.Add("class", "active");
+                    courses.Attributes.Add("class", "active");
                     break;
                 case "Departments":
-                    Departments.Attributes.Add("class", "active");
-                    break;
-                case "Enrollments":
-                    Enrollments.Attributes.Add("class", "active");
+                    departments.Attributes.Add("class", "active");
                     break;
                 case "About":
                     about.Attributes.Add("class", "active");
