@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 //using statements that are requiored to connect to EF(Entity FrameWork) DB
 using COMP229_F2017_Lesson6.Models;
 using System.Web.ModelBinding;
+using System.Linq.Dynamic;
 
 namespace COMP229_F2017_Lesson6
 {
@@ -19,6 +20,8 @@ namespace COMP229_F2017_Lesson6
              */
             if (!IsPostBack)
             {
+                Session["SortColumn"] = "StudentID";//default short column
+                Session["SortDirection"] = "ASC";
                 // Get the Student Data
                 this.GetStudents();
             }
@@ -28,14 +31,17 @@ namespace COMP229_F2017_Lesson6
         /// </summary>
         private void GetStudents()
         {
-            // Connect  to Entity FrameWork
+            // Connect  to Entity FrameWork DB
             using (ControlsoContext db = new ControlsoContext())
             {
+                string SortString = Session["SortColumn"].ToString() + " " + Session["SortDirection"].ToString();
+
                 //Query the Students Table using EF and LINQ
                 var Students = (from allStudents in db.Students
                                 select allStudents);
                 // bind the result to the Student GridView
-                StudentGridView.DataSource = Students.ToList();
+                //StudentGridView.DataSource = Students.ToList();
+                StudentGridView.DataSource = Students.AsQueryable().OrderBy(SortString).ToList();
                 StudentGridView.DataBind();
             }
         }
@@ -66,6 +72,72 @@ namespace COMP229_F2017_Lesson6
                 this.GetStudents();
             }
 
+        }
+
+        protected void PageDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //Set new Page Size
+            //StudentGridView.PageSize = Convert.ToInt32(PageDropDownList);
+
+        }
+
+        protected void StudentGridView_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            //get the column to sort by
+            Session["SortColumn"] = e.SortExpression;
+
+            //Refresh the Grid View
+            this.GetStudents();
+
+            // toggle the deriction
+            Session["SortDirection"] = Session["SortDirection"].ToString() == "ASC" ? "DESC" : "ASC";
+        }
+
+        protected void StudentGridView_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (IsPostBack)
+            {
+                if (e.Row.RowType == DataControlRowType.Header)//if header row has been clicked
+                {
+                    LinkButton linkbutton = new LinkButton();
+                    for (int index = 0; index < StudentGridView.Columns.Count -1; index++)
+                    {
+                        if (StudentGridView.Columns[index].SortExpression == Session["SortColumn"].ToString())
+                        {
+                            if (Session["SortDirection"].ToString() == "ASC")
+                            {
+                                linkbutton.Text = "<i class='fa fa-caret-up fa-lg'></i>";
+                            }
+                            else
+                            {
+                                linkbutton.Text = "<i class='fa fa-caret-down fa-lg'></i>";
+                            }
+
+                            e.Row.Cells[index].Controls.Add(linkbutton);
+                        }
+
+                    }
+
+                }
+            }
+        }
+
+        protected void StudentGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            // Set the new page number
+            StudentGridView.PageIndex = e.NewPageIndex;
+
+            //Refresh the Gried view
+            this.GetStudents();
+        }
+
+        protected void PageSizeDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //Set new Page Size
+            StudentGridView.PageSize = Convert.ToInt32(PageSizeDropDownList.SelectedValue);
+
+            //refresh the gridview
+            this.GetStudents();
         }
     }
 }

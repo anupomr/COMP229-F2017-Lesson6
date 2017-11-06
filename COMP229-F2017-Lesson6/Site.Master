@@ -12,6 +12,7 @@
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
     <link href="Content/bootstrap-theme.min.css" rel="stylesheet" />
     <link href="Content/font-awesome.min.css" rel="stylesheet" />
+     <link href="Content/app.css" rel="stylesheet" />
 </head>
 <body>
     <form id="form1" runat="server">
@@ -72,8 +73,8 @@
     </nav>
 
     <!-- Scripts Section -->
-    <script src="Scripts/jquery-2.2.4.min.js"></script>
-    <script src="Scripts/bootstrap.min.js"></script>
-    <script src="Scripts/app.js"></script>
+    <script src="/Scripts/jquery-2.2.4.min.js"></script>
+    <script src="/Scripts/bootstrap.min.js"></script>
+    <script src="/Scripts/app.js"></script>
 </body>
 </html>

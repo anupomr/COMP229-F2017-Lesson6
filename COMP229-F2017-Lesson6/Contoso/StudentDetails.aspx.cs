@@ -16,7 +16,35 @@ namespace COMP229_F2017_Lesson6
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if ((!IsPostBack) && (Request.QueryString.Count > 0))
+            {
+                this.GetStudent();
+            }
+        }
 
+        protected void GetStudent()
+        {
+            //populated the form with existing data from db
+            int StudentID = Convert.ToInt32(Request.QueryString["StudentID"]);
+            //Connect to the EF DB
+            using (ControlsoContext db = new ControlsoContext())
+            {
+                // populate a student object  instance with the studentID
+                // from the url parameter
+                Student updateStudent = (from student in db.Students
+                                         where student.StudentID == StudentID
+                                         select student).FirstOrDefault();
+                // map the student properties to the form control
+                if(updateStudent != null)
+                {
+                    LastNameTextBox.Text = updateStudent.LastName;
+                    FirstNameTextbox.Text = updateStudent.FirstMidName;
+                    EnrollmentDateTextbox.Text = updateStudent.EnrollmentDate.ToString("yyyy-MM-dd");
+
+                }
+
+
+            }
         }
 
         protected void CancelButton_Click(object sender, EventArgs e)
@@ -39,6 +67,11 @@ namespace COMP229_F2017_Lesson6
                 if (Request.QueryString.Count > 0)//our URL has a StudentID in it
                 {
                     // get the id from the URL
+                    StudentID = Convert.ToInt32(Request.QueryString["StudentID"]);
+                    //get the Current  student  from EF bd
+                    newStudent = (from student in db.Students
+                                  where student.StudentID == StudentID
+                                  select student).FirstOrDefault();
                 }
                 // add form data th the  new student record
                 newStudent.LastName = LastNameTextBox.Text;
